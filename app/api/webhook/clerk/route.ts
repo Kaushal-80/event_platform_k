@@ -66,6 +66,8 @@ export async function POST(req: Request) {
       photo: image_url,
     }
 
+    console.log(user)
+
     const newUser = await createUser(user);
 
     if(newUser) {
@@ -76,8 +78,12 @@ export async function POST(req: Request) {
       })
     }
 
-    return NextResponse.json({ message: 'OK', user: newUser })
+    return NextResponse.json({ message: 'new user created', user: newUser })
   }
+
+
+ 
+  
 
   if (eventType === 'user.updated') {
     const {id, image_url, first_name, last_name, username } = evt.data
@@ -94,6 +100,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: 'OK', user: updatedUser })
   }
 
+
+  
+
   if (eventType === 'user.deleted') {
     const { id } = evt.data
 
@@ -103,5 +112,8 @@ export async function POST(req: Request) {
   }
  
   return new Response('', { status: 200 })
+
+ 
+  
 }
  
